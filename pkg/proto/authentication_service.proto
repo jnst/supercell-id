@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package authentication;
+
+service AuthenticationService {
+  rpc Register(RegisterRequest) returns (RegisterResponse);
+  rpc Signin(SigninRequest) returns (SigninResponse);
+}
+
+message RegisterRequest {
+  string email = 1;  // Email
+}
+
+message RegisterResponse {
+  enum Status {
+    UNSPECIFIED = 0;
+    SUCCESS = 1;       // Success
+    ALREADY_EXISTS = 2; // Email address already registered
+  }
+  Status status = 1; // Register status
+}
+
+message SigninRequest {
+  string email = 1;      // Email
+  string code = 2;  // Authentication code
+}
+
+message SigninResponse {
+  enum Status {
+    UNSPECIFIED = 0;
+    SUCCESS = 1;       // Success
+    FAILED = 2; // Authentication failed
+    ACCOUNT_LOCKED = 3; // Account locked due to fraud detection
+  }
+  string token = 1; // JWT Token
+  Status status = 2; // Sign-in status
+}
