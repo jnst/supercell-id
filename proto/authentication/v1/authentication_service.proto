@@ -2,33 +2,37 @@ syntax = "proto3";
 
 package authentication.v1;
 
+import "buf/validate/validate.proto";
+
+option go_package = "github.com/jnst/supercell-id/pkg/gen/authentication/v1";
+
 service AuthenticationService {
   rpc Register(RegisterRequest) returns (RegisterResponse);
   rpc Signin(SigninRequest) returns (SigninResponse);
 }
 
 message RegisterRequest {
-  string email = 1;  // Email
+  string email = 1 [(buf.validate.field).string.email = true]; // Email
 }
 
 message RegisterResponse {
   enum Status {
     STATUS_UNSPECIFIED = 0;
-    STATUS_SUCCESS = 1;       // Success
+    STATUS_SUCCESS = 1; // Success
     STATUS_ALREADY_EXISTS = 2; // Email address already registered
   }
   Status status = 1; // Register status
 }
 
 message SigninRequest {
-  string email = 1;      // Email
-  string code = 2;  // Authentication code
+  string email = 1; // Email
+  string code = 2; // Authentication code
 }
 
 message SigninResponse {
   enum Status {
     STATUS_UNSPECIFIED = 0;
-    STATUS_SUCCESS = 1;       // Success
+    STATUS_SUCCESS = 1; // Success
     STATUS_FAILED = 2; // Authentication failed
     STATUS_ACCOUNT_LOCKED = 3; // Account locked due to fraud detection
   }
