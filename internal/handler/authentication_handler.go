@@ -1,9 +1,12 @@
 package handler
 
 import (
-	"connectrpc.com/connect"
 	"context"
+
+	"connectrpc.com/connect"
+
 	v1 "github.com/jnst/supercell-id/pkg/gen/authentication/v1"
+	"github.com/jnst/supercell-id/pkg/logger"
 )
 
 type AuthenticationServer struct {
@@ -19,6 +22,7 @@ func (s *AuthenticationServer) Register(
 ) (*connect.Response[v1.RegisterResponse], error) {
 
 	// TODO: implement here
+	logger.FromContext(ctx).Info("register")
 
 	return connect.NewResponse[v1.RegisterResponse](&v1.RegisterResponse{
 		Status: v1.RegisterResponse_STATUS_SUCCESS,
