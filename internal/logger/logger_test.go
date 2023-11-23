@@ -7,7 +7,7 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/jnst/supercell-id/pkg/logger"
+	"github.com/jnst/supercell-id/internal/logger"
 )
 
 func TestNew(t *testing.T) {

@@ -5,8 +5,8 @@ import (
 
 	"connectrpc.com/connect"
 
+	"github.com/jnst/supercell-id/internal/logger"
 	v1 "github.com/jnst/supercell-id/pkg/gen/authentication/v1"
-	"github.com/jnst/supercell-id/pkg/logger"
 )
 
 type AuthenticationServer struct {

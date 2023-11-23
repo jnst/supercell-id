@@ -9,7 +9,11 @@ import (
 var contextKey = struct{}{}
 
 func New() *slog.Logger {
-	return slog.New(slog.NewJSONHandler(os.Stdout, nil))
+	return slog.New(slog.NewTextHandler(os.Stdout, &slog.HandlerOptions{
+		AddSource:   true,
+		Level:       slog.LevelDebug,
+		ReplaceAttr: nil,
+	}))
 }
 
 func WithContext(ctx context.Context, logger *slog.Logger) context.Context {
